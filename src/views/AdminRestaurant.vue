@@ -92,10 +92,7 @@ export default {
         };
       } catch (e) {
         console.log(e);
-        Toast.fire({
-          icon: "error",
-          title: "無法取得餐廳資訊，請蕭後再試",
-        });
+        Toast.fireError("無法取得餐廳資訊，請蕭後再試");
       }
     },
   },

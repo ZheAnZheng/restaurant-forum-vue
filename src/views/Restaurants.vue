@@ -89,10 +89,7 @@ export default {
         this.previousPage = prev;
         this.nextPage = next;
       } catch (error) {
-        Toast.fire({
-          icon: "error",
-          title: "無法取得餐廳資料，請稍後再試",
-        });
+        Toast.fireError("無法取得餐廳資料，請稍後再試")
         console.log("error", error);
       }
     },

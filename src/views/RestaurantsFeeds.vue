@@ -42,10 +42,7 @@ export default {
       try {
         await this.tryFetchFeeds();
       } catch (e) {
-        Toast.fire({
-          icon: "error",
-          title: "讀取Feeds頁面錯誤，請稍候",
-        });
+       Toast.fireError("讀取Feeds頁面錯誤，請稍候")
         console.log(e);
       }
     },

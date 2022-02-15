@@ -67,10 +67,7 @@ export default {
         this.restaurants = response.data.restaurants;
       } catch (e) {
         console.log(e);
-        Toast.fire({
-          icon: "error",
-          title: "無法讀取後台餐廳，請稍後再試",
-        });
+        Toast.fireError("無法讀取後台餐廳，請稍後再試");
       }
     },
     async deleteRestaurant(id) {
@@ -86,10 +83,7 @@ export default {
         );
       } catch (e) {
         console.log(e.message);
-        Toast.fire({
-          icon: "error",
-          title: "無法刪除餐廳，請稍後再試",
-        });
+        Toast.fireError("無法刪除餐廳，請稍後再試");
       }
     },
   },

@@ -81,10 +81,7 @@ export default {
         await this.tryAddFavorite(restaurantId);
       } catch (e) {
         console.log(e);
-        Toast.fire({
-          icon: "error",
-          title: "無法將餐廳加入最愛，請稍後再試",
-        });
+        Toast.fireError("無法將餐廳加入最愛，請稍後再試",)
       }
     },
     async tryAddFavorite(restaurantId) {
@@ -103,10 +100,7 @@ export default {
         await this.tryDeleteFavorite(restaurantId);
       } catch (e) {
         console.log(e);
-        Toast.fire({
-          icon: "error",
-          title: "無法將餐廳移除最愛，請稍後再試",
-        });
+        Toast.fireError("無法將餐廳移除最愛，請稍後再試")
       }
       this.restaurant = {
         ...this.restaurant,
@@ -129,10 +123,7 @@ export default {
         await this.tryAddLike(restaurantId);
       } catch (e) {
         console.log(e);
-        Toast.fire({
-          icon: "error",
-          title: "無法加入喜愛，請稍後再試",
-        });
+        Toast.fireError("無法加入喜愛，請稍後再試")
       }
     },
     async tryAddLike(restaurantId) {
@@ -151,10 +142,7 @@ export default {
         await this.tryDeleteLike(restaurantId)
       }catch(e){
         console.log(e)
-        Toast.fire({
-          icon:'error',
-          title:'無法移出喜愛，請稍後再試'
-        })
+        Toast.fireError('無法移出喜愛，請稍後再試')
       }
     },
     async tryDeleteLike(restaurantId){

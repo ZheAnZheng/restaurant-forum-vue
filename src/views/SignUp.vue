@@ -100,10 +100,7 @@ export default {
         this.isProcessing = true;
 
         if (!this.isPasswordCorrect) {
-          Toast.fire({
-            icon: "error",
-            title: "密碼不相同!",
-          });
+         Toast.fireWarning("密碼不相同!")
           this.isProcessing = false;
           return;
         }
@@ -117,20 +114,14 @@ export default {
         if (data.status !== "success") {
           throw new Error(data.message);
         } else {
-          Toast.fire({
-            icon: "success",
-            title: "註冊成功!",
-          });
+          Toast.fireSuccess("註冊成功!")
         }
         this.isProcessing = false;
         this.$router.replace("/");
       } catch (e) {
         console.log(e);
         this.isProcessing = false;
-        Toast.fire({
-          icon: "error",
-          title: "註冊失敗，請稍後再試",
-        });
+        Toast.fireError("註冊失敗，請稍後再試")
       }
     },
   },

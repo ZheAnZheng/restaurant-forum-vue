@@ -164,10 +164,7 @@ export default {
         this.isLoading = false
       } catch (error) {
         this.isLoading = false
-        Toast.fire({
-          icon: 'error',
-          title: '無法取得餐廳類別，請稍後再試'
-        })
+       Toast.fireError('無法取得餐廳類別，請稍後再試')
       }
     },
     handleFileChange(e) {
@@ -186,16 +183,10 @@ export default {
       
       console.log(this.restaurant)
       if (!this.restaurant.name) {
-        Toast.fire({
-          icon: 'warning',
-          title: '請填寫餐廳名稱'
-        })
+        Toast.fireWarning('請填寫餐廳名稱')
         return
       } else if (!this.restaurant.categoryId) {
-        Toast.fire({
-          icon: 'warning',
-          title: '請選擇餐廳類別'
-        })
+       Toast.fireWarning('請選擇餐廳類別')
         return
       }
 

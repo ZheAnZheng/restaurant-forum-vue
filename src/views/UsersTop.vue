@@ -59,10 +59,7 @@ export default {
         this.tryFetachUsers();
       } catch (e) {
         console.log(e);
-        Toast.fire({
-          icon: "error",
-          title: "無法取得UserTop，請稍後再試",
-        });
+        Toast.fireError("無法取得UserTop，請稍後再試");
       }
     },
     async tryFetachUsers() {
@@ -93,10 +90,7 @@ export default {
           }
         });
       } catch (error) {
-        Toast.fire({
-          icon: "error",
-          title: "無法加入追蹤，請稍後再試",
-        });
+        Toast.fireError("無法加入追蹤，請稍後再試");
       }
     },
     async deleteFollowing(userId) {
@@ -119,10 +113,7 @@ export default {
           }
         });
       } catch (error) {
-        Toast.fire({
-          icon: "error",
-          title: "無法取消追蹤，請稍後再試",
-        });
+        Toast.fireError("無法取消追蹤，請稍後再試");
       }
     },
   },

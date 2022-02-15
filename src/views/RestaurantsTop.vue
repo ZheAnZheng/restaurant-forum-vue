@@ -75,10 +75,7 @@ export default {
         await this.tryFetchRestaurants();
       } catch (e) {
         console.log(e);
-        Toast.fire({
-          icon: "error",
-          title: "無法讀取人氣餐廳，請稍等再試",
-        });
+        Toast.fireError("無法讀取人氣餐廳，請稍等再試");
       }
     },
     async tryFetchRestaurants() {
@@ -109,10 +106,7 @@ export default {
         });
       } catch (e) {
         console.log(e);
-        Toast.fire({
-          icon: "error",
-          title: "無法加入喜愛，請稍候再試",
-        });
+        Toast.fireError("無法加入喜愛，請稍候再試");
       }
     },
     async deleteFavorite(restaurantId) {
@@ -135,10 +129,7 @@ export default {
         });
       } catch (e) {
         console.log(e);
-        Toast.fire({
-          icon: "error",
-          title: "無法移除喜愛，請稍候再試",
-        });
+        Toast.fireError("無法移除喜愛，請稍候再試");
       }
     },
   },

@@ -35,10 +35,7 @@ export default {
 
         this.$router.push({ name: "admin-restaurants" });
       } catch (error) {
-        Toast.fire({
-          icon: "error",
-          title: "無法建立餐廳，請稍後再試",
-        });
+       Toast.fireError("無法建立餐廳，請稍後再試")
       }
     },
   },

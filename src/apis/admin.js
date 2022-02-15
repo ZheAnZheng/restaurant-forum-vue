@@ -2,16 +2,35 @@ import { apiHelper } from "./../utils/helpers";
 const getToken = () => localStorage.getItem("token");
 
 export default {
-  users:{
-    create(userData){
+  users: {
+    create(userData) {
       return apiHelper.post("/signup", userData);
-    }
+    },
   },
   categories: {
     get() {
       return apiHelper.get("/admin/categories", {
         headers: { Authorization: `Bearer ${getToken()}` },
       });
+    },
+    create(data) {
+      return apiHelper.post("/admin/categories", data, {
+        headers: { Authorization: `Bearer ${getToken()}` },
+      });
+    },
+    delete({ categoryId }) {
+      return apiHelper.delete(`/admin/categories/${categoryId}`, {
+        headers: { Authorization: `Bearer ${getToken()}` },
+      });
+    },
+    update({ categoryId, name }) {
+      return apiHelper.put(
+        `/admin/categories/${categoryId}`,
+        { name },
+        {
+          headers: { Authorization: `Bearer ${getToken()}` },
+        }
+      );
     },
   },
   restaurants: {

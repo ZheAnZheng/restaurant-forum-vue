@@ -76,11 +76,7 @@ export default {
     async trySignIn(){
       
       if (!this.email || !this.password) {
-        Toast.fire({
-          icon: 'warning',
-          title: '請填入 email 和 password'
-        })
-
+        Toast.fireWarning('請填入 email 和 password')
         return
       }
       this.isProcessing=true;
@@ -97,12 +93,6 @@ export default {
           this.$router.push("/restaurants");
         }
         
-    },
-    fireWarningToast(title){
-      Toast.fire({
-        icon:'warning',
-        title
-      })
     },
 
   },

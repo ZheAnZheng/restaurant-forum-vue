@@ -57,10 +57,7 @@ export default {
         this.$router.push({ name: 'admin-restaurants' })
       } catch (error) {
         this.isProcessing = false
-        Toast.fire({
-          icon: 'error',
-          title: '無法更新餐廳資料，請稍後再試'
-        })
+        Toast.fireError('無法更新餐廳資料，請稍後再試')
       }
     },
     async fetchRestaurant (restaurantId) {
@@ -92,10 +89,7 @@ export default {
           categoryId
         }
       } catch (error) {
-        Toast.fire({
-          icon: 'error',
-          title: '無法取得餐廳資料，請稍後再試'
-        })
+        Toast.fireError('無法取得餐廳資料，請稍後再試')
       }
     },
   },
