@@ -24,6 +24,8 @@
   </div>
 </template>
 <script>
+import {Toast} from '../utils/helpers.js';
+import restaurantsAPI from '../apis/restaurants.js';
 const dummyData={
   "restaurant": {
         "id": 1,
@@ -105,6 +107,30 @@ export default {
   data(){
     return{
       restaurant:dummyData.restaurant
+    }
+  },
+  created(){
+    const {id}=this.$route.params
+    this.fetchDashbord(id)
+  },
+  beforeRouteUpdate(to,from,next){
+    const {id}=to.params;
+    this.fetchDashbord(id);
+    next()
+  },
+  methods:{
+    async fetchDashbord(restaurantId){
+      try{
+        const response =await restaurantsAPI.getRestaurantDashBoard({restaurantId})
+        console.log(response)
+        if(response.statusText!=="OK"){
+          throw new Error('')
+        }
+        this.restaurant=response.data.restaurant;
+      }catch(e){
+        console.log(e)
+        Toast.fireError('讀取失敗')
+      }
     }
   }
 }
