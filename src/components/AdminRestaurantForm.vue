@@ -201,7 +201,7 @@ export default {
 
       const form = e.target
       const formData = new FormData(form)
-      console.log(formData)
+      
       this.$emit('after-submit', formData)
     }
   },

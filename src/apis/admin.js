@@ -2,6 +2,11 @@ import { apiHelper } from "./../utils/helpers";
 const getToken = () => localStorage.getItem("token");
 
 export default {
+  users:{
+    create(userData){
+      return apiHelper.post("/signup", userData);
+    }
+  },
   categories: {
     get() {
       return apiHelper.get("/admin/categories", {

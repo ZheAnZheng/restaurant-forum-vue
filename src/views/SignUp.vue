@@ -62,8 +62,12 @@
         />
       </div>
 
-      <button class="btn btn-lg btn-primary btn-block mb-3" type="submit">
-        Submit
+      <button
+        class="btn btn-lg btn-primary btn-block mb-3"
+        type="submit"
+        :disabled="isProcessing"
+      >
+        {{ isProcessing ? "Registing" : "Submit" }}
       </button>
 
       <div class="text-center mb-3">
@@ -78,6 +82,8 @@
 </template>
 
 <script>
+import { Toast } from "../utils/helpers.js";
+import adminAPI from "../apis/admin.js";
 export default {
   data() {
     return {
@@ -85,17 +91,47 @@ export default {
       password: "",
       name: "",
       passwordCheck: "",
+      isProcessing: false,
     };
   },
   methods: {
-    handleSubmit() {
-      const data = JSON.stringify({
-        name: this.name,
-        email: this.email,
-        password: this.password,
-        passwordCheck: this.passwordCheck,
-      });
-      console.log(data);
+    async handleSubmit() {
+      try {
+        this.isProcessing = true;
+
+        if (!this.isPasswordCorrect) {
+          Toast.fire({
+            icon: "error",
+            title: "密碼不相同!",
+          });
+          this.isProcessing = false;
+          return;
+        }
+
+        const { data } = await adminAPI.users.create({
+          email: this.email,
+          name: this.name,
+          password: this.password,
+          passwordCheck: this.passwordCheck,
+        });
+        if (data.status !== "success") {
+          throw new Error(data.message);
+        } else {
+          Toast.fire({
+            icon: "success",
+            title: "註冊成功!",
+          });
+        }
+        this.isProcessing = false;
+        this.$router.replace("/");
+      } catch (e) {
+        console.log(e);
+        this.isProcessing = false;
+        Toast.fire({
+          icon: "error",
+          title: "註冊失敗，請稍後再試",
+        });
+      }
     },
   },
   computed: {
