@@ -51,10 +51,12 @@ export default {
     };
   },
   created() {
-    const { page = "", categoryId = "" } = this.$route.query;
+    
+    const { page = '', categoryId = "" } = this.$route.query;
+   
     this.fetchRestaurants({
-      page,
-      categoryId,
+      queryPage:page,
+      queryCategoryId:categoryId,
     });
   },
   methods: {
@@ -64,6 +66,9 @@ export default {
           page: queryPage,
           categoryId: queryCategoryId,
         });
+        if(response.statusText!=="OK"){
+          throw new Error('not fetching data')
+        }
         // STEP 2：透過解構賦值，將所需要的資料從 response.data 取出
         const {
           restaurants,

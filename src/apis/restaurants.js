@@ -2,7 +2,7 @@ import { apiHelper } from "./../utils/helpers";
 const getToken = () => localStorage.getItem("token");
 
 export default {
-  getRestaurants({ page, categoryId }) {
+  getRestaurants({ page, categoryId}) {
     //URLSearchParams將參數轉換成params格式 ?=params
     const searchParams = new URLSearchParams({ page, categoryId });
     return apiHelper.get(`/restaurants?${searchParams.toString()}`, {
