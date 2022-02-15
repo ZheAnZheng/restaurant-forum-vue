@@ -9,7 +9,7 @@ const routes = [
   {
     path:'/',
     name:'root',
-    redirect:'/restaurants'
+    redirect:'/signin'
   },
   {
     path:'/restaurants',
@@ -39,6 +39,7 @@ const routes = [
     name:"restaurant-dashboard",
     component:()=>import('../views/RestaurantDashboard.vue')
   },
+
   {
     path:'/users/top',
     name:'users-top',
@@ -51,14 +52,56 @@ const routes = [
     component:()=>import ('../views/User.vue')
   },
   {
-    path:'/signin',
-    name:'Sig-in',
-    component:SignIn
+    path:'/users/:id/edit',
+    name:'users-edit',
+    component:()=>import ('../views/UserEdit.vue')
   },
+  {
+    path:'/admin',
+    exact:true,
+    redirect:'/admin/restaurants',
+    
+  },
+  {
+    path:'/admin/categories',
+    name:'admin-categories',
+    component:()=>import ('../views/AdminCategories')
+  },
+  {
+    path:'/admin/users',
+    name:'admin-users',
+    component:()=>import ('../views/AdminUsers')
+  },
+  {
+    path:'/admin/restaurants',
+    name:'admin-restaurants',
+    component:()=>import ('../views/AdminRestaurants.vue')
+  },
+    {
+      path: '/admin/restaurants/new',
+      name: 'admin-restaurant-new',
+      component: () => import('../views/AdminRestaurantNew.vue')
+    },
+  {
+      path: '/admin/restaurants/:id',
+      name: 'admin-restaurant',
+      component: () => import('../views/AdminRestaurant.vue')
+  },
+   
+    {
+      path: '/admin/restaurants/:id/edit',
+      name: 'admin-restaurant-edit',
+      component: () => import('../views/AdminRestaurantEdit.vue')
+    },
   {
     path:'/signUp',
     name:'sign-up',
     component:()=>import ('../views/SignUp.vue')
+  },
+  {
+    path:'/signin',
+    name:'Sig-in',
+    component:SignIn
   },
   {
     path:'*',

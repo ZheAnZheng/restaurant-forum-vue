@@ -9,9 +9,9 @@
 
       <div v-for="user in users" :key="user.id" class="col-3">
         <!-- <a href="#"> -->
-          <router-link :to="`${user.id}`">
+          <router-link :to="{name:'users',params:{id:user.id}}">
           <img
-            :src="user.image"
+            :src='user.id'
             width="140px"
             height="140px"
           >
@@ -42,6 +42,7 @@
 </template>
 <script>
 import NavTabs from '../components/NavTabs.vue'
+
 const dummyData={
     users:[{
             "id": 1,
@@ -49,7 +50,7 @@ const dummyData={
             "email": "root@example.com",
             "password": "$2a$10$gFXZT20xGTogjEUpcEZfmuIt2pWprzCOhQJLUNI56h1siKXHuqJsK",
             "isAdmin": true,
-            "image": "/img/bear.32e81fae.jpg",
+            "image": null,
             "createdAt": "2021-12-24T04:10:21.000Z",
             "updatedAt": "2021-12-24T04:10:21.000Z",
             "Followers": [],
@@ -62,7 +63,7 @@ const dummyData={
             "email": "user1@example.com",
             "password": "$2a$10$DX/zNtSIXpvcwBI33DP9S.R.xIfUB9Vb2XJQeNvX1ZdvKd/yG9Xx.",
             "isAdmin": false,
-            "image": "/img/duck.5a5c3a2c.jpg",
+            "image": null,
             "createdAt": "2021-12-24T04:10:21.000Z",
             "updatedAt": "2021-12-24T04:10:21.000Z",
             "Followers": [],
@@ -75,7 +76,7 @@ const dummyData={
             "email": "user2@example.com",
             "password": "$2a$10$b959r6qh3n1ow0hrzEYed.JSMIvdhn4XXrSeog6g/Khoh.2FGUspK",
             "isAdmin": false,
-            "image": "/img/duck2.46170b4c.jpg",
+            "image": null,
             "createdAt": "2021-12-24T04:10:21.000Z",
             "updatedAt": "2021-12-24T04:10:21.000Z",
             "Followers": [],
