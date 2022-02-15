@@ -2,6 +2,17 @@ import { apiHelper } from "../utils/helpers.js";
 const getToken = () => localStorage.getItem("token");
 
 export default {
+  //透過token取得當前使用者
+  getCurrentUser() {
+    return apiHelper.get(`/get_current_user`, {
+      headers: { Authorization: `Bearer ${getToken()}` },
+    });
+  },
+  get({ userId }) {
+    return apiHelper.get(`/users/${userId}`, {
+      headers: { Authorization: `Bearer ${getToken()}` },
+    });
+  },
   addFavorite({ restaurantId }) {
     return apiHelper.post(`/favorite/${restaurantId}`, null, {
       headers: { Authorization: `Bearer ${getToken()}` },

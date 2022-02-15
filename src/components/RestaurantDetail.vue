@@ -86,6 +86,11 @@ export default {
             restaurant:this.initialRestaurant
         }
     },
+    watch:{
+      initialRestaurant(newValue){
+        this.restaurant=newValue
+      }
+    },
     methods:{
       addFavorite(){
           this.restaurant={

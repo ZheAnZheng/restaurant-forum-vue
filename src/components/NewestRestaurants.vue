@@ -9,7 +9,7 @@
         :key="restaurant.id"
       >
         <h4>
-          <router-link :to="{name:'restaurant',params:{id:restaurant}}">{{ restaurant.name }}</router-link>
+          <router-link :to="{name:'restaurant',params:{id:restaurant.id}}">{{ restaurant.name }}</router-link>
           
           &nbsp;
           <small>{{ restaurant.Category ? restaurant.Category.name : '未分類'

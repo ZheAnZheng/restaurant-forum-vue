@@ -48,6 +48,11 @@ export default {
       required: true
     }
   },
+  watch:{
+    restaurantComments(newVal){
+      return newVal
+    }
+  },
   mixins:[fromNowFilter],
   data(){
       return{
