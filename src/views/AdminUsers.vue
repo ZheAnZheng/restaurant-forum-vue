@@ -58,7 +58,7 @@ export default {
     async fetchUsers() {
       try {
         const response = await adminAPI.users.getUsers();
-        console.log(response)
+        console.log(response);
         if (response.statusText !== "OK") {
           throw new Error("cant fetch users");
         }
@@ -69,22 +69,36 @@ export default {
         Toast.fireError("讀取用戶失敗，起稍後再試");
       }
     },
-    async toggleUserRole(userId) {
-      try {
-        const user = this.users.filter((user) => user.id === userId);
-        user.isAdmin = !user.isAdmin;
-        const { data } = await adminAPI.users.update({
-          userId,
-          isAdmin: user.isAdmin,
-        });
-        if (data.status !== "success") {
-          throw new Error(data.message);
+    toggleUserRole(userId) {
+      this.users = this.users.map((user) => {
+        if (user.id === userId) {
+          user.isAdmin=!user.isAdmin;
+         
+          this.updateRole(userId,user.isAdmin)
+          return {
+            ...user,
+            isAdmin: user.isAdmin,
+          };
+        } else {
+          return {
+            ...user,
+          };
         }
-      } catch (e) {
-        console.log(e);
-        Toast.fireError("切換失敗，請稍後再試");
-      }
+      });
     },
+    async updateRole(userId,isAdmin){
+      try{
+        const {data}=await adminAPI.users.update({userId,isAdmin});
+        console.log(data)
+        if(data.status!=='success'){
+          throw new Error(data.message)
+        }
+
+      }catch(e){
+        console.log(e)
+        Toast.fireError('切換管理員失敗，請稍候再試')
+      }
+    }
   },
 };
 </script>
