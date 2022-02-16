@@ -6,6 +6,16 @@ export default {
     create(userData) {
       return apiHelper.post("/signup", userData);
     },
+    getUsers(){
+      return apiHelper.get("/admin/users", {
+        headers: { Authorization: `Bearer ${getToken()}` },
+      });
+    },
+    update({userId,isAdmin}){
+      return apiHelper.put(`/admin/users/${userId}`,{isAdmin} ,{
+        headers: { Authorization: `Bearer ${getToken()}` },
+      });
+    }
   },
   categories: {
     get() {

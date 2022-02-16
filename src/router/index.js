@@ -113,6 +113,7 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   store.dispatch("fetchCurrentUser");
+  
   next();
 });
 export default router;

@@ -5,6 +5,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+
     currentUser: {
       id: -1,
       name: "",
@@ -24,6 +25,7 @@ export default new Vuex.Store({
       // 將使用者的登入狀態改為 true
       state.isAuthenticated = true;
     },
+    
   },
   actions: {
     async fetchCurrentUser({ commit }) {
@@ -42,7 +44,7 @@ export default new Vuex.Store({
       } catch (error) {
         console.error(error.message);
       }
-    }
+    },
     
   },
   modules: {},
