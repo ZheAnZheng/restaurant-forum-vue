@@ -88,7 +88,7 @@ export default {
     },
     async updateRole(userId,isAdmin){
       try{
-        const {data}=await adminAPI.users.update({userId,isAdmin});
+        const {data}=await adminAPI.users.update({userId,isAdmin:`${isAdmin}`});
         console.log(data)
         if(data.status!=='success'){
           throw new Error(data.message)

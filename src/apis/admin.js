@@ -12,7 +12,7 @@ export default {
       });
     },
     update({userId,isAdmin}){
-      console.log(userId ,isAdmin)
+      
       return apiHelper.put(`/admin/users/${userId}`,{isAdmin} ,{
         headers: { Authorization: `Bearer ${getToken()}` },
       });
