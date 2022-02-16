@@ -24,7 +24,7 @@
               <strong>{{ profile.Followers.length }}</strong> followers (追隨者)
             </li>
           </ul>
-          <p v-if="isCurrentUserEqualProfileUser">
+          <p v-if="isProfileOwner">
             <router-link
               :to="{ name: 'users-edit', params: { id: profile.id } }"
               ><button type="submit" class="btn btn-primary">
@@ -65,7 +65,7 @@ export default {
       type: Object,
       required: true,
     },
-    isCurrentUserEqualProfileUser: {
+    isProfileOwner: {
       type: Boolean,
       required: true,
     },

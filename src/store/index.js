@@ -42,7 +42,8 @@ export default new Vuex.Store({
       } catch (error) {
         console.error(error.message);
       }
-    },
+    }
+    
   },
   modules: {},
 });

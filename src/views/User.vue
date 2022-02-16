@@ -4,7 +4,7 @@
       <!-- userProfileCard -->
       <user-profile-card
         :profile="profile"
-        :isCurrentUserEqualProfileUser="isCurrentUserEqualProfileUser"
+        :isProfileOwner="isProfileOwner"
         :initialIsFollowed="isFollowed"
         @updateAfterFollowing="updateAfterFollowing"
       ></user-profile-card>
@@ -77,8 +77,8 @@ export default {
     this.fetchUser(id);
   },
   computed: {
-    isCurrentUserEqualProfileUser() {
-      return this.profile.id === this.currentUser.id;
+    isProfileOwner() {
+      return this.isCurrentUserEqualProfileUser()
     },
     ...mapState(["currentUser"]),
   },
@@ -86,6 +86,7 @@ export default {
     async fetchUser(userId) {
       try {
         const response = await usersAPI.get({ userId });
+        
         console.log(response.data);
         if (response.statusText !== "OK") {
           throw new Error("cant fetch User");
@@ -101,6 +102,11 @@ export default {
       const { id } = this.profile;
       this.fetchUser(id);
     },
+    isCurrentUserEqualProfileUser(){
+      console.log(this.profile.id)
+      console.log(this.currentUser.id)
+      return this.profile.id== this.currentUser.id;
+    }
   },
 };
 </script>

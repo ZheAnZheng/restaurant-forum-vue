@@ -9,8 +9,9 @@
           name="name"
           class="form-control"
           placeholder="Enter Name"
-          v-model="userData.name"
+          v-model="currentUser.name"
           required
+          :disabled="isProcessing"
         />
       </div>
 
@@ -19,7 +20,7 @@
         <img
           width="200px"
           height="200px"
-          :src="userData.image"
+          :src="image | emptyImage"
           class="d-block mb-4"
         />
         <input
@@ -29,62 +30,67 @@
           accept="image/*"
           @change="handleFileChagne"
           class="form-control-file"
+          :disabled="isProcessing"
         />
       </div>
 
-      <button type="submit" class="btn btn-primary">Submit</button>
+      <button type="submit" class="btn btn-primary" :disabled="isProcessing">Submit</button>
     </form>
   </div>
 </template>
 <script>
 import { emptyImageFilter } from "../utils/mixins.js";
-const dummyData = {
-  id: 1,
-  name: "root",
-  email: "root@example.com",
-  password: "$2a$10$OJ3jR93XlEMrQtYMWOIQh.EINWgaRFTXkd0Xi5OC/Vz4maztUXEPe",
-  isAdmin: true,
-  image: "https://i.imgur.com/58ImzMM.png",
-  createdAt: "2019-07-30T16:24:54.983Z",
-  updatedAt: "2019-08-01T10:33:51.095Z",
-};
+import { Toast } from "../utils/helpers.js";
+import usersAPI from "../apis/users.js";
+import { mapState, mapActions } from "vuex";
+
 export default {
-  created() {
-    this.fetchUser();
-  },
-  data() {
+  data(){
     return {
-      userData: {
-        id: -1,
-        name: "",
-        email: "",
-        password: "",
-        isAdmin: false,
-        image: "",
-        createdAt: "",
-        updatedAt: "",
-      },
-    };
+      image:'',
+      isProcessing:false
+    }
   },
-  mixins: [],
+  created(){
+    this.image=this.currentUser.image
+  },
+  computed: {
+    ...mapState(["currentUser"]),
+  },
+  mixins:[emptyImageFilter],
   methods: {
-    fetchUser() {
-      this.userData = dummyData;
-    },
+    ...mapActions(["fetchCurrentUser"]),
     handleFileChagne(e) {
       const { files } = e.target;
+      console.log(files)
       if (files.length > 0) {
-        this.userData.image = window.URL.createObjectURL(files[0]);
-      } else {
-        this.userData.image = emptyImageFilter(this.userData.image);
+        this.image = window.URL.createObjectURL(files[0]);
       }
     },
-    handleSubmit(e) {
-      const formData = new FormData(e.target);
-      for (let [name, value] of formData.entries()) {
-        console.log(name + ": " + value);
+    async handleSubmit(e) {
+      try{
+        const formData = new FormData(e.target);
+        for(let [name , value] of formData.entries()){
+          console.log(name ,value)
+        }
+        this.isProcessing=true;
+        const {data}=await usersAPI.update({userId:this.currentUser.id,formData});
+        
+        if(data.status!=="success"){
+          throw new Error(data.message)
+        }
+        await this.fetchCurrentUser()
+        Toast.fireSuccess('更新成功')
+        
+      }catch(e){
+        console.log(e);
+        Toast.fireError('儲存失敗，請稍後再試')
+      }finally{
+        this.isProcessing=false;
       }
+
     },
   },
+ 
 };
 </script>
