@@ -13,9 +13,13 @@
 export default {
     props:{
         followings:{
-            type:Object,
-            required:true
+            type:Array
         }
+    },
+    watch:{
+      followings(newVal){
+        this.followings=newVal;
+      }
     }
 }
 </script>
